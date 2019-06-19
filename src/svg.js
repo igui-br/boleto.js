@@ -1,4 +1,19 @@
 const xmlserializer = require('xmlserializer');
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
+const dom = new JSDOM(
+  '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head></head><body></body></html>', 
+  { 
+    contentType: "text/html",
+    includeNodeLocations: true,
+    resources: "usable",
+    runScripts: "dangerously",
+  }
+);
+// global statement, order is important
+global.window = dom.window;
+global.document = global.window.document;
+global.navigator = global.window.navigator;
 
 class SVG {
   /**
